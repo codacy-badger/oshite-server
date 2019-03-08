@@ -1,5 +1,5 @@
 # oshite-server
-[![][travis img]][travis] [![][codacy img]][codacy] [![][license img]][license] [![][discord img]][discord]
+[![][travis img]][travis] [![][codacy img]][codacy] [![][license img]][license]
 
 [travis]: https://travis-ci.org/oshite/oshite-server
 [travis img]: https://travis-ci.org/oshite/oshite-server.svg?branch=master
