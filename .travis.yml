@@ -1,0 +1,16 @@
+language: java
+dist: trusty
+sudo: false
+
+os:
+- linux
+- osx
+
+jdk:
+- openjdk11
+
+before_install:
+- unset _JAVA_OPTIONS
+
+script:
+- mvn clean install

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <packaging>jar</packaging>
+
+  <groupId>io.oshite</groupId>
+  <artifactId>oshite-server</artifactId>
+  <version>0.1</version>
+  <description>Official oshite.io server project</description>
+  <inceptionYear>2019</inceptionYear>
+
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <properties>
+    <!-- Project defaults -->
+    <oshite.java.version>11</oshite.java.version>
+    <oshite.encoding>UTF-8</oshite.encoding>
+
+    <!-- Maven plugins -->
+    <maven.compiler.version>3.8.0</maven.compiler.version>
+    <maven.javadoc.version>3.0.1</maven.javadoc.version>
+    <maven.source.version>3.0.1</maven.source.version>
+    <protobuf.maven.version>0.5.1</protobuf.maven.version>
+
+    <!-- Maven extensions -->
+    <os.maven.version>1.5.0.Final</os.maven.version>
+
+    <!-- Normal dependencies -->
+    <grpc.version>1.19.0</grpc.version>
+    <vavr.version>0.9.3</vavr.version>
+
+    <!-- Test dependencies -->
+    <spock.version>spock-1.3</spock.version>
+  </properties>
+
+  <build>
+    <defaultGoal>clean install</defaultGoal>
+    <finalName>oshite-server v${project.version}</finalName>
+
+    <!-- Extension needed to grpc -->
+    <extensions>
+      <extension>
+        <groupId>kr.motd.maven</groupId>
+        <artifactId>os-maven-plugin</artifactId>
+        <version>${os.maven.version}</version>
+      </extension>
+    </extensions>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven.compiler.version}</version>
+        <configuration>
+          <source>${oshite.java.version}</source>
+          <target>${oshite.java.version}</target>
+          <encoding>${oshite.encoding}</encoding>
+        </configuration>
+      </plugin>
+
+      <!-- Plugin needed to grpc -->
+      <plugin>
+        <groupId>org.xolstice.maven.plugins</groupId>
+        <artifactId>protobuf-maven-plugin</artifactId>
+        <version>${protobuf.maven.version}</version>
+        <configuration>
+          <protocArtifact>com.google.protobuf:protoc:3.6.1:exe:${os.detected.classifier}</protocArtifact>
+          <pluginId>grpc-java</pluginId>
+          <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.19.0:exe:${os.detected.classifier}</pluginArtifact>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>compile</goal>
+              <goal>compile-custom</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <repositories>
+    <repository>
+      <id>jitpack-repo</id>
+      <url>https://jitpack.io</url>
+    </repository>
+  </repositories>
+
+  <dependencies>
+    <!-- Normal dependencies -->
+    <dependency>
+      <groupId>io.grpc</groupId>
+      <artifactId>grpc-netty-shaded</artifactId>
+      <version>${grpc.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.grpc</groupId>
+      <artifactId>grpc-protobuf</artifactId>
+      <version>${grpc.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.grpc</groupId>
+      <artifactId>grpc-stub</artifactId>
+      <version>${grpc.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vavr</groupId>
+      <artifactId>vavr</artifactId>
+      <version>${vavr.version}</version>
+    </dependency>
+
+    <!-- Test dependencies -->
+    <dependency>
+      <groupId>org.spockframework.spock</groupId>
+      <artifactId>spock-core</artifactId>
+      <version>${spock.version}</version>
+    </dependency>
+  </dependencies>
+
+</project>
